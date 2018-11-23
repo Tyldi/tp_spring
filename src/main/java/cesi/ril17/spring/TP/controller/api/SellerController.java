@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,7 +84,7 @@ public class SellerController {
 	public ResponseEntity<String> deleteById(@PathVariable Long id) {
 		if(sellerService.deleteById(id)) {
 			return new ResponseEntity<String>(
-					"Data have been destoryed.", 
+					"Data have been destroyed.", 
 					HttpStatus.OK
 				);
 		}
@@ -101,7 +102,7 @@ public class SellerController {
 	public ResponseEntity<String> deleteAll() {
 		if(sellerService.deleteAll()) {
 			return new ResponseEntity<String>(
-					"Data have been destoryed.", 
+					"Data have been destroyed.", 
 					HttpStatus.OK
 				);
 		}
@@ -109,6 +110,22 @@ public class SellerController {
 				"An error occured. Please try later.", 
 				HttpStatus.OK
 			);
+	}
+	
+	/**
+	 *  Modifie le vendeur
+	 * @return
+	 */
+	@PutMapping("/modifySeller/{id}")
+	public ResponseEntity<String> modifySeller(@RequestBody Seller sel, @PathVariable Long id) {
+		if(sellerService.modifyById(id, sel)) {
+			return new ResponseEntity<String>(
+					"Data have been modified.", 
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<String>(
+				"An error occured. Please try later.", 
+				HttpStatus.OK);
 	}
 }
 

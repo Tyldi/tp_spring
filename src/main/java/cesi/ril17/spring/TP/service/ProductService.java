@@ -59,5 +59,17 @@ public class ProductService {
 		}
 		return true;
 	}
+
+	public boolean modifyById(Long id, Product prod) {
+		if(productRepo.existsById(id)) {
+			try {
+				productRepo.save(prod);
+			} catch(Exception e) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
 	
 }

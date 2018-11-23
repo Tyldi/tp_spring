@@ -36,6 +36,18 @@ public class SellerService {
 		return sel;
 	}
 	
+	public Boolean modifyById(Long id, Seller sel) {
+		if(sellerRepo.existsById(id)) {
+			try {
+				sellerRepo.save(sel);
+			} catch(Exception e) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	public Seller insertSeller(Seller seller) {
 		seller = sellerRepo.save(seller);
 		return seller;
